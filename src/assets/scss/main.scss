@@ -1,0 +1,172 @@
+@import './preflight.scss';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.app {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1.1;
+}
+
+h1 {
+  font-size: 4.2rem;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: 3.2rem;
+  margin-bottom: 0.5rem;
+}
+
+h3 {
+  font-size: 2.2rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  font-size: 1.4rem;
+}
+
+a {
+  text-decoration: underline;
+}
+
+header {
+  border-bottom: 1px solid #eee;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: end;
+  padding: 0 3rem;
+
+  .logo {
+    margin: 0 4rem 0 0;
+  }
+
+  ul {
+    display: flex;
+
+    li {
+      margin-right: 1px;
+
+      a {
+        background-color: #f6f6f6;
+        border-radius: 5px 5px 0 0;
+        display: block;
+        font-size: 2.2rem;
+        padding: 1rem 3rem 0.5rem;
+        text-decoration: none;
+
+        &:hover {
+          background-color: #e0e0e0;
+        }
+
+        &.active {
+          background-color: #eee;
+
+          &:hover {
+            background-color: #eee;
+          }
+        }
+      }
+    }
+  }
+}
+
+main {
+  background-color: #eee;
+  padding: 3rem;
+
+  section {
+    // margin: 0 auto;
+    max-width: 800px;
+  }
+
+  .search {
+    margin-bottom: 2rem;
+
+    form {
+      display: flex;
+      flex-wrap: nowrap;
+
+      input {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1.8rem;
+        outline: none;
+        padding: 10px;
+        width: 100%;
+
+        &::placeholder {
+          color: #ccc;
+        }
+      }
+
+      button {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 1rem 1.5rem;
+        cursor: pointer;
+      }
+    }
+
+    span {
+      color: #aaa;
+      display: block;
+      font-size: 1.4rem;
+      padding: 2px 5px;
+    }
+  }
+
+  ul {
+    li {
+      span {
+        color: #999;
+        display: inline-block;
+        font-size: 1.4rem;
+      }
+    }
+
+    &.posts {
+      > li {
+        border-top: 1px solid #ddd;
+        padding: 1rem 0;
+      }
+    }
+    &.comments {
+      margin-bottom: 1rem;
+
+      > li {
+        font-size: 1.6rem;
+
+        p {
+          color: #333;
+        }
+      }
+    }
+  }
+}
+
+footer {
+  border-top: 1px solid #eee;
+  padding: 0.5rem 3rem;
+}
