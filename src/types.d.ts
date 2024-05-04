@@ -55,6 +55,7 @@ export type PostListProps = {
 
 export type CommentListProps = {
   log: (message: string, name: string) => {};
-  comments: CommentProps[];
+  postId?: number;
+  comments?: CommentProps[];
   showBody?: boolean;
 };

@@ -1,33 +1,20 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import CommentList from '../common/CommentList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import useAppContext from '../../hooks/useAppContext';
-import { CommentProps, PostListProps, PostProps, UserProps } from '../../types';
+import { PostListProps, UserProps } from '../../types';
 
 const PostList = ({ log, filteredPosts }: PostListProps) => {
   log('Hello from', 'PostList component');
 
   const { state } = useAppContext();
 
-  //   const posts: PostProps[] = state.posts;
-
   const users: UserProps[] = state.users;
-
-  const comments: CommentProps[] = state.comments;
 
   const getUserByUserId = (userId: number) => {
     const user = users.find((user) => user.id === userId);
     return user;
-  };
-
-  const getAssociatedCommentsByPostId = (postId: number) => {
-    const associatedComments = comments.filter(
-      (comment) => comment.postId === postId
-    );
-
-    return associatedComments;
   };
 
   return (
@@ -35,8 +22,6 @@ const PostList = ({ log, filteredPosts }: PostListProps) => {
       {filteredPosts.length > 0 ? (
         filteredPosts.map((post) => {
           const user: any = getUserByUserId(post.userId);
-          const associatedComments = getAssociatedCommentsByPostId(post.id);
-
           return (
             <li key={post.id}>
               <span>
@@ -48,14 +33,13 @@ const PostList = ({ log, filteredPosts }: PostListProps) => {
                   {post.title}
                 </Link>
               </h2>
-
-              <CommentList log={log} comments={associatedComments} />
+              <CommentList log={log} postId={post.id} />
             </li>
           );
         })
       ) : (
         <li>
-          <p>Your search criteria has no results.</p>
+          <p>Your search criteria produced no results.</p>
         </li>
       )}
     </ul>
