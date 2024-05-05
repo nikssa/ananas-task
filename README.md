@@ -19,6 +19,15 @@ You will also see any lint errors in the console.
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
+### `npm run lint`
+
+Runs eslint checks and reports any errors, warnings in the project code
+
+### `npm run format`
+
+Runs prettier and formats the code according to rules defined in the .prettierrc.json file.\
+Prettier rules are also used on every commit - so that whatever developer uses in the local environment code is always formatted in the same manner. (husky library, lint-staged, prettier)
+
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
