@@ -164,9 +164,43 @@ main {
       }
     }
   }
+
+  span.user {
+    color: #999;
+    display: inline-block;
+    font-size: 1.4rem;
+  }
 }
 
 footer {
   border-top: 1px solid #eee;
   padding: 0.5rem 3rem;
+}
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 99;
+  .overlay {
+    background-color: #eee;
+    display: flex;
+    height: 100vh;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+  .text {
+    z-index: 1;
+  }
+}
+
+.hide {
+  display: none;
 }

@@ -14,13 +14,13 @@ export const AppContextProvider = (props: AppContextProviderProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   // DEV Fix: Prevent calling APIs twice (useEffect)
-  const postsLoading = useRef<boolean>(false);
-  const usersLoading = useRef<boolean>(false);
-  const commentsLoading = useRef<boolean>(false);
+  const postsFetching = useRef<boolean>(false);
+  const usersFetching = useRef<boolean>(false);
+  const commentsFetching = useRef<boolean>(false);
 
   useEffect(() => {
-    if (state.postsFetched === null && !postsLoading.current) {
-      postsLoading.current = true;
+    if (state.postsFetched === null && !postsFetching.current) {
+      postsFetching.current = true;
       fetch('https://jsonplaceholder.typicode.com/posts')
         .then((response) => response.json())
         .then((json: PostProps[]) => {
@@ -36,8 +36,8 @@ export const AppContextProvider = (props: AppContextProviderProps) => {
   }, [state.postsFetched]);
 
   useEffect(() => {
-    if (state.usersFetched === null && !usersLoading.current) {
-      usersLoading.current = true;
+    if (state.usersFetched === null && !usersFetching.current) {
+      usersFetching.current = true;
       fetch('https://jsonplaceholder.typicode.com/users')
         .then((response) => response.json())
         .then((json: UserProps[]) => {
@@ -50,8 +50,8 @@ export const AppContextProvider = (props: AppContextProviderProps) => {
   }, [state.usersFetched]);
 
   useEffect(() => {
-    if (state.commentsFetched === null && !commentsLoading.current) {
-      commentsLoading.current = true;
+    if (state.commentsFetched === null && !commentsFetching.current) {
+      commentsFetching.current = true;
       fetch('https://jsonplaceholder.typicode.com/comments')
         .then((response) => response.json())
         .then((json: CommentProps[]) => {

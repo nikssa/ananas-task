@@ -1,11 +1,7 @@
 import useAppContext from '../../hooks/useAppContext';
 import { PostListProps, UserProps } from '../../types';
+import { getUserByUserId } from '../../utils';
 import Post from './Post';
-
-const getUserByUserId = (userId: number, users: UserProps[]) => {
-  const user = users.find((user) => user.id === userId);
-  return user;
-};
 
 const PostList = ({ log, filteredPosts }: PostListProps) => {
   log('Hello from', 'PostList component');
