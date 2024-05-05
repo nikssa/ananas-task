@@ -23,6 +23,7 @@ const Filter = ({ log, filteredPosts, setKeyword }: FilterProps) => {
     const term = e.currentTarget.elements.searchTerm.value;
     setKeyword(term);
   };
+
   return (
     <div className='search'>
       <form onSubmit={handleSubmit}>
@@ -36,7 +37,7 @@ const Filter = ({ log, filteredPosts, setKeyword }: FilterProps) => {
           <FontAwesomeIcon icon={faMagnifyingGlass} size='2x' />
         </button>
       </form>
-      <span>Showing {filteredPosts.length} posts</span>
+      <span>Showing {filteredPosts?.length} posts</span>
     </div>
   );
 };

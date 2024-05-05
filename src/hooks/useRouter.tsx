@@ -6,7 +6,9 @@ import Post from '../components/pages/Post';
 import Layout from '../components/layout/Layout';
 import About from '../components/pages/About';
 
-export const useRouter = (consoleLog: any) => {
+export const useRouter = (
+  consoleLog: (message: string, name: string) => void
+) => {
   const router = createBrowserRouter([
     {
       // parent route component
@@ -16,22 +18,22 @@ export const useRouter = (consoleLog: any) => {
       children: [
         {
           path: '/',
-          element: <Home log={consoleLog} />,
+          element: <Home log={consoleLog} />
         },
         {
           path: 'posts',
-          element: <Posts log={consoleLog} />,
+          element: <Posts log={consoleLog} />
         },
         {
           path: 'posts/:id',
-          element: <Post log={consoleLog} />,
+          element: <Post log={consoleLog} />
         },
         {
           path: 'about',
-          element: <About log={consoleLog} />,
-        },
-      ],
-    },
+          element: <About log={consoleLog} />
+        }
+      ]
+    }
   ]);
   return router;
 };

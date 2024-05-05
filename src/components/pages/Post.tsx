@@ -13,15 +13,26 @@ const Post = ({ log }: LogProps) => {
 
   const [post, setPost] = useState<PostProps | null>(null);
 
+  // DEV Fix: ignore variable and setTimeout is used to prevent API called twice
   useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
-      .then((response) => response.json())
-      .then((json) => {
-        setPost(json);
-      });
+    let ignore = false;
+    setTimeout(() => {
+      if (!ignore) {
+        fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+          .then((response) => response.json())
+          .then((json) => {
+            setPost(json);
+          });
+      }
+    }, 0);
+
+    return () => {
+      ignore = true;
+    };
   }, [id]);
 
-  // const { state, dispatch } = useAppContext();
+  // const { users, dispatch } = useAppContext();
+  // export const getUserByPostId = () => {};
 
   return (
     <>

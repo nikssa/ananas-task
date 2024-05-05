@@ -1,5 +1,9 @@
+export type AppContextProviderProps = {
+  children: ReactNode;
+};
+
 export type LogProps = {
-  log: (message: string, name: string) => {};
+  log: (message: string, name: string) => void;
 };
 
 export type PostProps = {
@@ -43,18 +47,18 @@ export type UserProps = {
 };
 
 export type FilterProps = {
-  log: (message: string, name: string) => {};
-  filteredPosts: any[];
+  log: (message: string, name: string) => void;
+  filteredPosts: PostProps[];
   setKeyword: Dispatch<SetStateAction<string | null>>;
 };
 
 export type PostListProps = {
-  log: (message: string, name: string) => {};
-  filteredPosts: any[];
+  log: (message: string, name: string) => void;
+  filteredPosts: PostProps[];
 };
 
 export type CommentListProps = {
-  log: (message: string, name: string) => {};
+  log: (message: string, name: string) => void;
   postId?: number;
   comments?: CommentProps[];
   showBody?: boolean;

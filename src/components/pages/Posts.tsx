@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Filter from '../common/Filter';
 
-import { LogProps, PostProps, UserProps } from '../../types';
+import { LogProps } from '../../types';
 
 import useAppContext from '../../hooks/useAppContext';
 import PostList from '../common/PostList';
@@ -10,14 +10,9 @@ const Posts = ({ log }: LogProps) => {
   log('Hello from', 'Posts component');
 
   const [keyword, setKeyword] = useState<string | null>(null);
-
-  const { state } = useAppContext();
-
-  const posts: PostProps[] = state.posts;
-
-  const users: UserProps[] = state.users;
-
   const [filteredPosts, setFilteredPosts] = useState<any[]>([]);
+
+  const { posts, users } = useAppContext();
 
   useEffect(() => {
     if (!!keyword) {

@@ -1,12 +1,19 @@
-import { createContext, useEffect, useReducer, useRef } from 'react';
-import { initialState, reducer } from '../reducer';
+import { ReactNode, createContext, useEffect, useReducer, useRef } from 'react';
+import { StateProps, initialState, reducer } from '../reducer';
+import {
+  AppContextProviderProps,
+  CommentProps,
+  PostProps,
+  UserProps
+} from '../types';
 
-const AppContext = createContext(initialState);
+const AppContext = createContext<StateProps>(initialState);
 
-export const AppContextProvider = (props: any) => {
+export const AppContextProvider = (props: AppContextProviderProps) => {
   const { children } = props;
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  // DEV Fix: Prevent calling APIs twice (useEffect)
   const postsLoading = useRef<boolean>(false);
   const usersLoading = useRef<boolean>(false);
   const commentsLoading = useRef<boolean>(false);
@@ -16,7 +23,7 @@ export const AppContextProvider = (props: any) => {
       postsLoading.current = true;
       fetch('https://jsonplaceholder.typicode.com/posts')
         .then((response) => response.json())
-        .then((json: any[]) => {
+        .then((json: PostProps[]) => {
           const jsonSorted = json.sort((a, b) =>
             (a.title || '').localeCompare(b.title || '')
           );
@@ -33,7 +40,7 @@ export const AppContextProvider = (props: any) => {
       usersLoading.current = true;
       fetch('https://jsonplaceholder.typicode.com/users')
         .then((response) => response.json())
-        .then((json: any[]) => {
+        .then((json: UserProps[]) => {
           dispatch({ type: 'FETCH_USERS_SUCCESS', payload: json });
         })
         .catch((error) => {
@@ -47,7 +54,7 @@ export const AppContextProvider = (props: any) => {
       commentsLoading.current = true;
       fetch('https://jsonplaceholder.typicode.com/comments')
         .then((response) => response.json())
-        .then((json: any[]) => {
+        .then((json: CommentProps[]) => {
           dispatch({ type: 'FETCH_COMMENTS_SUCCESS', payload: json });
         })
         .catch((error) => {
@@ -57,7 +64,7 @@ export const AppContextProvider = (props: any) => {
   }, [state.commentsFetched]);
 
   return (
-    <AppContext.Provider value={{ state, dispatch }}>
+    <AppContext.Provider value={{ ...state, dispatch }}>
       {children}
     </AppContext.Provider>
   );

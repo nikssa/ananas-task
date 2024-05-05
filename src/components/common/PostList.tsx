@@ -1,40 +1,27 @@
-import { Link } from 'react-router-dom';
-import CommentList from '../common/CommentList';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
 import useAppContext from '../../hooks/useAppContext';
 import { PostListProps, UserProps } from '../../types';
+import Post from './Post';
+
+const getUserByUserId = (userId: number, users: UserProps[]) => {
+  const user = users.find((user) => user.id === userId);
+  return user;
+};
 
 const PostList = ({ log, filteredPosts }: PostListProps) => {
   log('Hello from', 'PostList component');
 
-  const { state } = useAppContext();
-
-  const users: UserProps[] = state.users;
-
-  const getUserByUserId = (userId: number) => {
-    const user = users.find((user) => user.id === userId);
-    return user;
-  };
+  const { users } = useAppContext();
 
   return (
     <ul className='posts'>
-      {filteredPosts.length > 0 ? (
+      {filteredPosts?.length > 0 ? (
         filteredPosts.map((post) => {
-          const user: any = getUserByUserId(post.userId);
+          const user: UserProps | undefined = getUserByUserId(
+            post.userId,
+            users
+          );
           return (
-            <li key={post.id}>
-              <span>
-                <FontAwesomeIcon icon={faUser} /> {user?.name}
-              </span>
-              <br />
-              <h2>
-                <Link to={`${post.id}`} target='blank'>
-                  {post.title}
-                </Link>
-              </h2>
-              <CommentList log={log} postId={post.id} />
-            </li>
+            <Post key={post.id} log={log} post={post} userName={user?.name} />
           );
         })
       ) : (
