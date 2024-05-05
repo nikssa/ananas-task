@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useEffect, useReducer, useRef } from 'react';
+import { createContext, useEffect, useReducer, useRef } from 'react';
 import { StateProps, initialState, reducer } from '../reducer';
 import {
   AppContextProviderProps,
