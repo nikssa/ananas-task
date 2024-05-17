@@ -12,33 +12,51 @@ const Post = ({ log }: LogProps) => {
 
   const { id } = useParams();
 
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
   const [post, setPost] = useState<PostProps | null>(null);
-  const [responseStatus, setResponseStatus] = useState<number | null>(null);
 
   // DEV Fix: ignore variable and setTimeout is used to prevent API called twice
   useEffect(() => {
-    let ignore = false;
-    setTimeout(() => {
-      if (!ignore) {
-        fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
-          .then((response: Response) => {
-            setResponseStatus(response.status);
-            return response.json();
-          })
-          .then((json) => {
-            setPost(json);
-          });
-      }
-    }, 0);
-    return () => {
-      ignore = true;
-    };
+    setLoading(true);
+    setError(null);
+
+    fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+      .then((response: Response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((json: PostProps) => {
+        setPost(json);
+        setLoading(false);
+      })
+      .catch((error: Error) => {
+        console.error('Error fetching post:', error);
+        // Handle error state here if needed
+        setError('Error fetching post. Please try again later.');
+        setLoading(false);
+      });
   }, [id]);
 
   const { users } = useAppContext();
   const user: UserProps | undefined = getUserByUserId(post?.userId, users);
 
-  return !!post && responseStatus === 200 ? (
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return (
+      <div>
+        <h1>Error</h1>
+        <p>{error}</p>
+      </div>
+    );
+  }
+
+  return !!post ? (
     <>
       <span className='user'>
         <FontAwesomeIcon icon={faUser} /> {user?.name}
