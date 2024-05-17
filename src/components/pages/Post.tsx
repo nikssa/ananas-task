@@ -12,13 +12,11 @@ const Post = ({ log }: LogProps) => {
 
   const { id } = useParams();
 
-  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [post, setPost] = useState<PostProps | null>(null);
 
   // DEV Fix: ignore variable and setTimeout is used to prevent API called twice
   useEffect(() => {
-    setLoading(true);
     setError(null);
 
     fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
@@ -30,22 +28,16 @@ const Post = ({ log }: LogProps) => {
       })
       .then((json: PostProps) => {
         setPost(json);
-        setLoading(false);
       })
       .catch((error: Error) => {
         console.error('Error fetching post:', error);
         // Handle error state here if needed
         setError('Error fetching post. Please try again later.');
-        setLoading(false);
       });
   }, [id]);
 
   const { users } = useAppContext();
   const user: UserProps | undefined = getUserByUserId(post?.userId, users);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   if (error) {
     return (
