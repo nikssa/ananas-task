@@ -4,7 +4,7 @@ import { getUserByUserId } from '../../utils';
 import Post from './Post';
 
 const PostList = ({ log, filteredPosts }: PostListProps) => {
-  log('Hello from', 'PostList component');
+  // log('Hello from', 'PostList component');
 
   const { users } = useAppContext();
 

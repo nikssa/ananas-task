@@ -8,7 +8,7 @@ import useAppContext from '../../hooks/useAppContext';
 import { getUserByUserId } from '../../utils';
 
 const Post = ({ log }: LogProps) => {
-  log('Hello from', 'Post component');
+  // log('Hello from', 'Post component');
 
   const { id } = useParams();
 
@@ -34,15 +34,6 @@ const Post = ({ log }: LogProps) => {
       ignore = true;
     };
   }, [id]);
-
-  // const { posts } = useAppContext();
-
-  // useEffect(() => {
-  //   if (!!posts) {
-  //     const post = posts.find((post: PostProps) => post.id === Number(id));
-  //     setPost(!!post ? post : null);
-  //   }
-  // }, [id, posts]);
 
   const { users } = useAppContext();
   const user: UserProps | undefined = getUserByUserId(post?.userId, users);

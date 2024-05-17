@@ -1,7 +1,7 @@
 import { LogProps } from '../../types';
 
 const About = ({ log }: LogProps) => {
-  log('Hello from', 'About component');
+  // log('Hello from', 'About component');
 
   return (
     <>

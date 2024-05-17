@@ -2,7 +2,7 @@ import React from 'react';
 import { LogProps } from '../../types';
 
 const Home = ({ log }: LogProps) => {
-  log('Hello from', 'Home component');
+  // log('Hello from', 'Home component');
   return (
     <>
       <h1>Home Page</h1>

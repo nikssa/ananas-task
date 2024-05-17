@@ -12,7 +12,7 @@ interface searchTerm extends HTMLFormElement {
 }
 
 const Filter = ({ log, filteredPosts, setKeyword }: FilterProps) => {
-  log('Hello from', 'Filter component');
+  // log('Hello from', 'Filter component');
 
   //   const handleChange = (e: any) => {
   //     setKeyword(e.target.value);

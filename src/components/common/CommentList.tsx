@@ -14,7 +14,7 @@ const getAssociatedCommentsByPostId = (
 };
 
 const CommentList = ({ log, postId, showBody }: CommentListProps) => {
-  log('Hello from', 'CommentList component');
+  // log('Hello from', 'CommentList component');
 
   const { comments } = useAppContext();
 

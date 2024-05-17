@@ -3,7 +3,7 @@ import Footer from '../layout/Footer';
 import { LogProps } from '../../types';
 
 const NotFound = ({ log }: LogProps) => {
-  log('Hello from', 'NotFound component');
+  // log('Hello from', 'NotFound component');
   return (
     <>
       <Header />
